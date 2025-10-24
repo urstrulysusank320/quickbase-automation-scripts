@@ -3,7 +3,7 @@
   "trigger": {
     "type": "record_updated",
     "table": "bu8bfunx7",
-    "fields": ["Status"]  // optional, triggers only if this field changes
+    "fields": ["Status"]
   },
   "actions": [
     {
