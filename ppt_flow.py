@@ -18,3 +18,14 @@ def run_script():
 @flow
 def ppt_flow_trigger():
     run_script()
+
+from pptx import Presentation
+
+def ppt_flow(title="Default PPT"):
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[0])
+    slide.shapes.title.text = title
+    file_path = f"/tmp/{title}.pptx"
+    prs.save(file_path)
+    return file_path
+
