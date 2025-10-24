@@ -1,1 +1,25 @@
-
+{
+  "name": "Generate Quickbase Document",
+  "trigger": {
+    "type": "record_updated",
+    "table": "bu8bfunx7",
+    "fields": ["Status"]  // optional, triggers only if this field changes
+  },
+  "actions": [
+    {
+      "type": "http_request",
+      "method": "POST",
+      "url": "https://api.github.com/repos/your-org/quickbase-automation-scripts/dispatches",
+      "headers": {
+        "Accept": "application/vnd.github.everest-preview+json",
+        "Authorization": "Bearer YOUR_GITHUB_PAT"
+      },
+      "body": {
+        "event_type": "generate_document",
+        "client_payload": {
+          "recordId": "{{Record ID}}"
+        }
+      }
+    }
+  ]
+}
