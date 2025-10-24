@@ -12,7 +12,7 @@
       "url": "https://api.github.com/repos/your-org/quickbase-automation-scripts/dispatches",
       "headers": {
         "Accept": "application/vnd.github.everest-preview+json",
-        "Authorization": "Bearer YOUR_GITHUB_PAT"
+        "Authorization": "Bearer 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"
       },
       "body": {
         "event_type": "generate_document",
