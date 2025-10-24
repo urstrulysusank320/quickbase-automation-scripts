@@ -1,15 +1,21 @@
+%pip install pptx
+%pip install prefect
+
+from prefect import flow, task
 from pptx import Presentation
-import requests
 
-# Example: create a simple PPT
-ppt = Presentation()
-slide = ppt.slides.add_slide(ppt.slide_layouts[0])
-slide.shapes.title.text = "Quickbase Report"
-slide.placeholders[1].text = "Generated via GitHub + app.perfect"
+@task
+def generate_ppt(record_id: int):
+    ppt = Presentation()
+    slide = ppt.slides.add_slide(ppt.slide_layouts[0])
+    slide.shapes.title.text = f"Record {record_id}"
+    slide.placeholders[1].text = "Generated via Quickbase + Prefect"
+    
+    file_path = f"record_{record_id}.pptx"
+    ppt.save(file_path)
+    return file_path
 
-# Save locally (or to web server)
-file_path = "quickbase_report.pptx"
-ppt.save(file_path)
-
-# Optional: upload to a storage (S3, GDrive, etc.) and get download URL
-print("PPT generated successfully:", file_path)
+@flow(name="Generate PPT Flow")
+def generate_ppt_flow(record_id: int):
+    path = generate_ppt(record_id)
+    return path
