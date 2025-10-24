@@ -1,0 +1,4 @@
+prefect
+python-pptx
+boto3
+requests
